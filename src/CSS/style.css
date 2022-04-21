@@ -96,11 +96,14 @@ main {
 }
 
 #individual_contact span {
-  font-size: 3rem;
   margin: 5px;
   background-color: var(--blue);
   height: 3rem;
   border-radius: 50px;
+}
+
+#individual_contact span > i {
+  font-size: 3rem;
 }
 
 #display_all_contacts {
