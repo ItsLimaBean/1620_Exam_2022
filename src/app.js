@@ -53,8 +53,8 @@ const contactsList = [
 const allContactsList = document.querySelector("#display_all_contacts")
 const displaySingleContact = document.querySelector("#display_single_contact")
 
-
 function loadContacts(contacts) {
+  toggleAllContacts(true)
   for (contact of contacts) {
     const html = `
     <div class="contact" data-index=${contact.ID}>
@@ -63,16 +63,6 @@ function loadContacts(contacts) {
     </div>
     `
     allContactsList.insertAdjacentHTML("afterbegin", html)
-  }
-}
-
-loadContacts(contactsList)
-
-function toggleAllContacts(showall) {
-  allContactsList.setAttribute("style", `display: ${showall ? 'block' : 'none'};`)
-  displaySingleContact.setAttribute("style", `display: ${showall ? 'none' : 'block'};`)
-  if (showall) {
-    document.querySelector(".single-contact-view")?.remove()
   }
 }
 
@@ -91,13 +81,32 @@ function showSingleContact(contact) {
   `
   displaySingleContact.insertAdjacentHTML("afterbegin", html)
 
-  document.querySelector(".icons > .fa-solid.fa-circle-xmark").addEventListener("click", function() {
-    toggleAllContacts(true)
-  })
+  document.querySelector(".icons > .fa-solid.fa-circle-xmark").addEventListener("click", onCloseIndividualClick)
 }
 
-allContactsList.addEventListener("click", function(event) {
-  const targetArticle = event.target.closest("div")
-  const contactId = targetArticle.dataset.index
-  showSingleContact(contactsList[contactId])
-})
+function toggleAllContacts(showall) {
+  const toShow = showall ? allContactsList : displaySingleContact
+  const toHide = showall ? displaySingleContact : allContactsList
+
+  toShow.removeAttribute("style")
+  toHide.setAttribute("style", "display: none;")
+
+  if (showall) {
+    document.querySelector("#individual_contact")?.remove()
+  }
+}
+
+function onCloseIndividualClick() {
+  toggleAllContacts(true)
+}
+
+function onContactClick(event) {
+  const targetDiv = event.target.closest("div")
+  const contactId = targetDiv.dataset.index
+  if (contactId) {
+    showSingleContact(contactsList[contactId])
+  } 
+}
+
+loadContacts(contactsList)
+allContactsList.addEventListener("click", onContactClick)
