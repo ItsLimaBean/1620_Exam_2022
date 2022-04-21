@@ -71,21 +71,29 @@ loadContacts(contactsList)
 function toggleAllContacts(showall) {
   allContactsList.setAttribute("style", `display: ${showall ? 'block' : 'none'};`)
   displaySingleContact.setAttribute("style", `display: ${showall ? 'none' : 'block'};`)
+  if (showall) {
+    document.querySelector(".single-contact-view")?.remove()
+  }
 }
 
 function showSingleContact(contact) {
   toggleAllContacts(false)
   const html = `
-  <article>
+  <article class="single-contact-view">
     <img src="img/${contact.image}" alt="Image of ${contact.image}">
     <div>
       <h1>${contact.name}</h1>
       <p>${contact.phone}</p>
       <p>${contact.email}</p>
     </div>
+    <span class="icons"><i class="fa-solid fa-circle-xmark"></i></span>
   </article>
   `
   displaySingleContact.insertAdjacentHTML("afterbegin", html)
+
+  document.querySelector(".icons > .fa-solid.fa-circle-xmark").addEventListener("click", function() {
+    toggleAllContacts(true)
+  })
 }
 
 allContactsList.addEventListener("click", function(event) {
