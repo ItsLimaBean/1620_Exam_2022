@@ -26,9 +26,10 @@ img {
 .container {
   display: flex;
 
-
+  flex-direction: column;
   font-family: 'Inter', sans-serif;
   background-color: var(--white);
+  height: 100vh;
 }
 
 header {
@@ -66,8 +67,11 @@ header a:hover {
 }
 
 main {
-
+  display: flex;
+  flex-grow: 1;
+  align-items: flex-start;
 }
+
 
 #individual_contact {
   display: flex;
@@ -104,6 +108,8 @@ main {
   flex-grow: 0;
   gap: 20px;
   padding: 20px;
+  flex-wrap: wrap;
+  align-items: stretch;
 }
 
 #display_all_contacts div {
@@ -114,6 +120,7 @@ main {
   border-radius: 5px;
   padding: 10px;
   align-items: center;
+  flex-grow: 1;
 }
 
 #display_all_contacts img {

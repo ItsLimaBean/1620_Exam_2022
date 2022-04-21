@@ -97,7 +97,7 @@ function showSingleContact(contact) {
 }
 
 allContactsList.addEventListener("click", function(event) {
-  const targetArticle = event.target.closest("article")
+  const targetArticle = event.target.closest("div")
   const contactId = targetArticle.dataset.index
   showSingleContact(contactsList[contactId])
 })
