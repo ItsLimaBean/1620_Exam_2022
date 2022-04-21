@@ -57,10 +57,10 @@ const displaySingleContact = document.querySelector("#display_single_contact")
 function loadContacts(contacts) {
   for (contact of contacts) {
     const html = `
-    <article class="contact" data-index=${contact.ID}>
+    <div class="contact" data-index=${contact.ID}>
       <img src="img/${contact.image}" alt="Image of ${contact.image}">
       <p>${contact.name}</p>
-    </article>
+    </div>
     `
     allContactsList.insertAdjacentHTML("afterbegin", html)
   }
@@ -79,7 +79,7 @@ function toggleAllContacts(showall) {
 function showSingleContact(contact) {
   toggleAllContacts(false)
   const html = `
-  <article class="single-contact-view">
+  <div class="single-contact-view">
     <img src="img/${contact.image}" alt="Image of ${contact.image}">
     <div>
       <h1>${contact.name}</h1>
@@ -87,7 +87,7 @@ function showSingleContact(contact) {
       <p>${contact.email}</p>
     </div>
     <span class="icons"><i class="fa-solid fa-circle-xmark"></i></span>
-  </article>
+  </div>
   `
   displaySingleContact.insertAdjacentHTML("afterbegin", html)
 
