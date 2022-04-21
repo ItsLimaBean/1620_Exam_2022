@@ -50,5 +50,19 @@ const contactsList = [
     ID: "6"
   },
 ]
+const allContactsList = document.querySelector("#display_all_contacts")
 
-// Your code goes here
+
+function loadContacts(contacts) {
+  for (contact of contacts) {
+    const html = `
+    <article class="contact">
+      <img src="img/${contact.image}" alt="Image of ${contact.image}">
+      <p>${contact.name}</p>
+    </article>
+    `
+    allContactsList.insertAdjacentHTML("afterbegin", html)
+  }
+}
+
+loadContacts(contactsList)
