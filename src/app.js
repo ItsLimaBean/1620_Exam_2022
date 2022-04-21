@@ -79,7 +79,7 @@ function toggleAllContacts(showall) {
 function showSingleContact(contact) {
   toggleAllContacts(false)
   const html = `
-  <div class="single-contact-view">
+  <div id="individual_contact">
     <img src="img/${contact.image}" alt="Image of ${contact.image}">
     <div>
       <h1>${contact.name}</h1>
