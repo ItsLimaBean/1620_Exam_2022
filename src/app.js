@@ -51,12 +51,13 @@ const contactsList = [
   },
 ]
 const allContactsList = document.querySelector("#display_all_contacts")
+const displaySingleContact = document.querySelector("#display_single_contact")
 
 
 function loadContacts(contacts) {
   for (contact of contacts) {
     const html = `
-    <article class="contact">
+    <article class="contact" data-index=${contact.ID}>
       <img src="img/${contact.image}" alt="Image of ${contact.image}">
       <p>${contact.name}</p>
     </article>
@@ -66,3 +67,29 @@ function loadContacts(contacts) {
 }
 
 loadContacts(contactsList)
+
+function toggleAllContacts(showall) {
+  allContactsList.setAttribute("style", `display: ${showall ? 'block' : 'none'};`)
+  displaySingleContact.setAttribute("style", `display: ${showall ? 'none' : 'block'};`)
+}
+
+function showSingleContact(contact) {
+  toggleAllContacts(false)
+  const html = `
+  <article>
+    <img src="img/${contact.image}" alt="Image of ${contact.image}">
+    <div>
+      <h1>${contact.name}</h1>
+      <p>${contact.phone}</p>
+      <p>${contact.email}</p>
+    </div>
+  </article>
+  `
+  displaySingleContact.insertAdjacentHTML("afterbegin", html)
+}
+
+allContactsList.addEventListener("click", function(event) {
+  const targetArticle = event.target.closest("article")
+  const contactId = targetArticle.dataset.index
+  showSingleContact(contactsList[contactId])
+})
